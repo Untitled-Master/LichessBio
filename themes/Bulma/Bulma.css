@@ -1,0 +1,75 @@
+/* Bulma Theme CSS */
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #f5f5f5;
+    color: #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.lichess {
+    border-radius: 9px;
+    height: auto;
+    width: 40%;
+    background-color: #3273dc;
+    color: #f5f5f5;
+    display: flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.sidebar {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #4a4a4a;
+}
+.sidebar img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.sidebar h1 {
+    font-size: 22px;
+    margin: 10px 0;
+    color: #f5f5f5;
+}
+.sidebar p {
+    margin: 5px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #f5f5f5;
+}
+.ratings {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ratings h2 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #f5f5f5;
+}
+.icon {
+    margin-right: 8px;
+    color: #f5f5f5;
+}
+.profile-url a {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+.profile-url a:hover {
+    text-decoration: underline;
+}
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
