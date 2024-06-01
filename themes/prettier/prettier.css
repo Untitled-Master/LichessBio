@@ -1,0 +1,71 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.lichess {
+    border-radius: 9px;
+    height: auto;
+    width: 40%;
+    background-color: #2B343B;
+    color: #9FC0A2;
+    display: flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.sidebar {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #444;
+}
+.sidebar img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.sidebar h1 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+.sidebar p {
+    margin: 5px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.ratings {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ratings h2 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.icon {
+    margin-right: 8px;
+    color: #9FC0A2;
+}
+.profile-url a {
+    color: #9FC0A2;
+    text-decoration: none;
+}
+.profile-url a:hover {
+    text-decoration: underline;
+}
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
