@@ -1,0 +1,75 @@
+/* Carbon Theme CSS */
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.lichess {
+    border-radius: 9px;
+    height: auto;
+    width: 40%;
+    background-color: #2d2d2d;
+    color: #d4d4d4;
+    display: flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.sidebar {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #404040;
+}
+.sidebar img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.sidebar h1 {
+    font-size: 22px;
+    margin: 10px 0;
+    color: #d4d4d4;
+}
+.sidebar p {
+    margin: 5px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #d4d4d4;
+}
+.ratings {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ratings h2 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #d4d4d4;
+}
+.icon {
+    margin-right: 8px;
+    color: #d4d4d4;
+}
+.profile-url a {
+    color: #d4d4d4;
+    text-decoration: none;
+}
+.profile-url a:hover {
+    text-decoration: underline;
+}
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
