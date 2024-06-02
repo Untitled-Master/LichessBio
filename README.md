@@ -2,7 +2,7 @@
 LichessBio is a widget designed to showcase your lichess profile in a nice elegant way.
 
 
-<p><img align="left" src="https://lichess-frpa65a31-petanons-projects.vercel.app/lichess-stats/Dzoomaster?v=2" alt="wwwwwwwwwwww" /></p>
+<p><img align="left" src="https://lichess-nu.vercel.app/lichess-stats/Dzoomaster" alt="Dzoomaster" /></p>
 
 
-![Lichess Stats](https://lichess-frpa65a31-petanons-projects.vercel.app/lichess-stats/Dzoomaster?v=2)
+![Lichess Stats](https://lichess-nu.vercel.app/lichess-stats/Dzoomaster)
