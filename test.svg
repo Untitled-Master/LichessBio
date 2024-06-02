@@ -1,30 +1,84 @@
-<svg width="800" height="400">
-  <rect x="0" y="0" width="800" height="400" fill="#0a0a0a" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lichess User Widget SVG</title>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300" style="background-color: #0a0a0a; font-family: 'Roboto Condensed', sans-serif;">
+        <!-- Background rectangle for the widget -->
+        <rect x="0" y="0" width="500" height="300" rx="10" fill="#363636" />
 
-  <g transform="translate(50, 50)">
-    <circle cx="50" cy="50" r="50" fill="#f5f5f5" />
-    <text x="50" y="120" font-size="22" fill="#f5f5f5">USERNAME</text>
+        <!-- Sidebar for the profile picture and user info -->
+        <g id="sidebar">
+            <!-- Profile picture placeholder -->
+            <circle cx="100" cy="80" r="50" fill="url(#profilePic)" />
+            <!-- Profile picture URL -->
+            <defs>
+                <pattern id="profilePic" patternUnits="userSpaceOnUse" width="100" height="100">
+                    <image href="https://i.pinimg.com/originals/31/35/27/3135276a3e0c9e65472d3e544839c658.jpg" x="-5" y="-5" width="110" height="110" />
+                </pattern>
+            </defs>
+            <!-- Username -->
+            <text x="50" y="160" fill="#f5f5f5" font-size="22" text-anchor="middle" id="username">Dzoomaster</text>
+            <!-- Online status -->
+            <circle cx="60" cy="180" r="5" fill="#23d160" id="statusDot" />
+            <text x="70" y="185" fill="#f5f5f5" font-size="14" id="lastSeen">Online: 1 day, 3 h, and 25 min ago</text>
+        </g>
 
-    <circle cx="100" cy="150" r="5" fill="#4a4a4a" /> 
-    <text x="110" y="155" font-size="12" fill="#f5f5f5">Offline</text>
-  </g>
+        <!-- Ratings and playtime -->
+        <g id="ratings" transform="translate(260, 50)">
+            <!-- Rapid rating -->
+            <text x="0" y="0" fill="#f5f5f5" font-size="18">
+                <tspan class="icon" dy="1.2em" dx="-1.2em">♞</tspan> Rapid: <tspan id="rapidRating">1500</tspan>
+            </text>
+            <!-- Blitz rating -->
+            <text x="0" y="30" fill="#f5f5f5" font-size="18">
+                <tspan class="icon" dy="1.2em" dx="-1.2em">⚡</tspan> Blitz: <tspan id="blitzRating">1600</tspan>
+            </text>
+            <!-- Bullet rating -->
+            <text x="0" y="60" fill="#f5f5f5" font-size="18">
+                <tspan class="icon" dy="1.2em" dx="-1.2em">🚀</tspan> Bullet: <tspan id="bulletRating">1700</tspan>
+            </text>
+            <!-- Playtime -->
+            <text x="0" y="90" fill="#f5f5f5" font-size="18">Playtime: <tspan id="playTime">10 hours</tspan></text>
+        </g>
+    </svg>
 
-  <g transform="translate(450, 50)">
-    <g transform="translate(0, 0)">
-      <text x="0" y="20" font-size="18" fill="#f5f5f5">Rapid:</text>
-      <text x="70" y="20" font-size="18" fill="#f5f5f5">RATING</text>
-      <path d="M20 5 L25 10 L15 10 Z" fill="#f5f5f5" transform="translate(50, 0)" /> </g>
-    <g transform="translate(0, 50)">
-      <text x="0" y="20" font-size="18" fill="#f5f5f5">Blitz:</text>
-      <text x="60" y="20" font-size="18" fill="#f5f5f5">RATING</text>
-      <path d="M10 5 L15 10 L5 10 Z" fill="#f5f5f5" transform="translate(40, 0)" /> </g>
-    <g transform="translate(0, 100)">
-      <text x="0" y="20" font-size="18" fill="#f5f5f5">Bullet:</text>
-      <text x="65" y="20" font-size="18" fill="#f5f5f5">RATING</text>
-      <path d="M20 5 L15 15 L25 15 Z" fill="#f5f5f5" transform="translate(40, 0)" /> </g>
-    <g transform="translate(0, 150)">
-      <text x="0" y="20" font-size="18" fill="#f5f5f5">Playtime:</text>
-      <text x="100" y="20" font-size="18" fill="#f5f5f5">PLAYTIME HOURS</text>
-    </g>
-  </g>
-</svg>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('https://lichess.org/api/user/Dzoomaster')
+                .then(response => response.json())
+                .then(data => {
+                    displayUserInfo(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('lastSeen').textContent = 'Error fetching data.';
+                });
+
+            function displayUserInfo(user) {
+                const seenAt = new Date(user.seenAt);
+                const now = new Date();
+                const timeDiff = now - seenAt;
+
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+                const isOnline = now - seenAt < 600000; // Assumes user is online if seen within the last 10 minutes
+
+                document.getElementById('username').textContent = user.username;
+                document.getElementById('statusDot').setAttribute('fill', isOnline ? '#23d160' : '#4a4a4a');
+                document.getElementById('lastSeen').textContent = `Online: ${days} days, ${hours} h, and ${minutes} min ago`;
+
+                document.getElementById('rapidRating').textContent = user.perfs.rapid.rating;
+                document.getElementById('blitzRating').textContent = user.perfs.blitz.rating;
+                document.getElementById('bulletRating').textContent = user.perfs.bullet.rating;
+                document.getElementById('playTime').textContent = `${Math.floor(user.playTime.total / (60 * 60 * 1000))} hours`;
+            }
+        });
+    </script>
+</body>
+</html>
