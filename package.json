@@ -1,0 +1,17 @@
+{
+  "name": "github-readme-lichess-stats",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^3.0.0",
+    "xmlbuilder2": "^3.0.0"
+  }
+}
