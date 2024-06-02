@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Widget</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .lichess {
+            border-radius: 9px;
+            height: auto;
+            width: 40%;
+            background-color: #363636;
+            color: #f5f5f5;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar {
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid #4a4a4a;
+        }
+        .sidebar img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .sidebar h1 {
+            font-size: 22px;
+            margin: 10px 0;
+            color: #f5f5f5;
+        }
+        .sidebar p {
+            margin: 5px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: #f5f5f5;
+        }
+        .ratings {
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .ratings h2 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #f5f5f5;
+        }
+        .icon {
+            margin-right: 8px;
+            color: #f5f5f5;
+        }
+        .profile-url a {
+            color: #f5f5f5;
+            text-decoration: none;
+        }
+        .profile-url a:hover {
+            text-decoration: underline;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="widget" class="lichess">
+        <div class="sidebar">
+            <img src="profile-pic-url" alt="username">
+            <h1>username</h1>
+            <p>
+                <span class="status-dot" style="background-color: online-status-color;"></span>
+                Online: days days, hours h, and minutes min ago
+            </p>
+        </div>
+        <div class="ratings">
+            <h2><i class="fas fa-chess-knight icon"></i>Rapid: rapid-rating</h2>
+            <h2><i class="fas fa-bolt icon"></i>Blitz: blitz-rating</h2>
+            <h2><i class="fas fa-tachometer-alt icon"></i>Bullet: bullet-rating</h2>
+            <h2>Playtime: playtime hours</h2>
+        </div>
+    </div>
+    <button id="download">Download as Image</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('download').addEventListener('click', function() {
+            html2canvas(document.getElementById('widget')).then(function(canvas) {
+                let link = document.createElement('a');
+                link.download = 'profile-widget.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
