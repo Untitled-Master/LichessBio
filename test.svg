@@ -1,125 +1,30 @@
-<svg width="480" height="133" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <foreignObject width="480" height="133">
-        <div xmlns="http://www.w3.org/1999/xhtml" class="container">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-            <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&amp;wght@300&amp;display=swap" rel="stylesheet">
-            <style>
-                .lichess {
-                    font-family: 'Roboto Condensed', sans-serif;
-                    color: #f5f5f5;
-                    border-radius: 9px;
-                    height: auto;
-                    width: 100%;
-                    background-color: #363636;
-                    display: flex;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                }
-                .sidebar {
-                    width: 50%;
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    border-right: 1px solid #4a4a4a;
-                }
-                .sidebar img {
-                    border-radius: 50%;
-                    width: 100px;
-                    height: 100px;
-                    margin-bottom: 10px;
-                }
-                .sidebar h1 {
-                    font-size: 22px;
-                    margin: 10px 0;
-                    color: #f5f5f5;
-                }
-                .sidebar p {
-                    margin: 5px 0;
-                    font-size: 14px;
-                    display: flex;
-                    align-items: center;
-                    color: #f5f5f5;
-                }
-                .ratings {
-                    width: 50%;
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                }
-                .ratings h2 {
-                    margin: 10px 0;
-                    font-size: 18px;
-                    color: #f5f5f5;
-                }
-                .icon {
-                    margin-right: 8px;
-                    color: #f5f5f5;
-                }
-                .profile-url a {
-                    color: #f5f5f5;
-                    text-decoration: none;
-                }
-                .profile-url a:hover {
-                    text-decoration: underline;
-                }
-                .status-dot {
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 50%;
-                    margin-right: 5px;
-                }
-            </style>
-            <div class="lichess" id="user-info">
-                <!-- User information will be displayed here -->
-            </div>
-        
-            <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    const userInfoDiv = document.getElementById('user-info');
-        
-                    fetch('https://lichess.org/api/user/Dzoomaster')
-                        .then(response => response.json())
-                        .then(data => {
-                            displayUserInfo(data);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching data:', error);
-                            userInfoDiv.innerHTML = `<p>Error fetching data.</p>`;
-                        });
-        
-                    function displayUserInfo(user) {
-                        const seenAt = new Date(user.seenAt);
-                        const now = new Date();
-                        const timeDiff = now - seenAt;
-        
-                        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        
-                        const profilePicUrl = `https://i.pinimg.com/originals/31/35/27/3135276a3e0c9e65472d3e544839c658.jpg`; // Assumed placeholder for profile picture
-                        const isOnline = now - seenAt < 600000; // Assumes user is online if seen within the last 10 minutes
-        
-                        userInfoDiv.innerHTML = `
-                            <div class="sidebar">
-                                <img src="${profilePicUrl}" alt="${user.username}">
-                                <h1>${user.username}</h1>
-                                <p>
-                                    <span class="status-dot" style="background-color: ${isOnline ? '#23d160' : '#4a4a4a'};"></span>
-                                    Online: ${days} days, ${hours} h, and ${minutes} min ago
-                                </p>
-                            </div>
-                            <div class="ratings">
-                                <h2><i class="fas fa-chess-knight icon"></i>Rapid: ${user.perfs.rapid.rating}</h2>
-                                <h2><i class="fas fa-bolt icon"></i>Blitz: ${user.perfs.blitz.rating}</h2>
-                                <h2><i class="fas fa-tachometer-alt icon"></i>Bullet: ${user.perfs.bullet.rating}</h2>
-                                <h2>Playtime: ${Math.floor(user.playTime.total / (60 * 60 * 1000))} hours</h2>
-                            </div>
-                        `;
-                    }
-                });
-            </script>
-        </div>
-    </foreignObject>
+<svg width="800" height="400">
+  <rect x="0" y="0" width="800" height="400" fill="#0a0a0a" />
+
+  <g transform="translate(50, 50)">
+    <circle cx="50" cy="50" r="50" fill="#f5f5f5" />
+    <text x="50" y="120" font-size="22" fill="#f5f5f5">USERNAME</text>
+
+    <circle cx="100" cy="150" r="5" fill="#4a4a4a" /> 
+    <text x="110" y="155" font-size="12" fill="#f5f5f5">Offline</text>
+  </g>
+
+  <g transform="translate(450, 50)">
+    <g transform="translate(0, 0)">
+      <text x="0" y="20" font-size="18" fill="#f5f5f5">Rapid:</text>
+      <text x="70" y="20" font-size="18" fill="#f5f5f5">RATING</text>
+      <path d="M20 5 L25 10 L15 10 Z" fill="#f5f5f5" transform="translate(50, 0)" /> </g>
+    <g transform="translate(0, 50)">
+      <text x="0" y="20" font-size="18" fill="#f5f5f5">Blitz:</text>
+      <text x="60" y="20" font-size="18" fill="#f5f5f5">RATING</text>
+      <path d="M10 5 L15 10 L5 10 Z" fill="#f5f5f5" transform="translate(40, 0)" /> </g>
+    <g transform="translate(0, 100)">
+      <text x="0" y="20" font-size="18" fill="#f5f5f5">Bullet:</text>
+      <text x="65" y="20" font-size="18" fill="#f5f5f5">RATING</text>
+      <path d="M20 5 L15 15 L25 15 Z" fill="#f5f5f5" transform="translate(40, 0)" /> </g>
+    <g transform="translate(0, 150)">
+      <text x="0" y="20" font-size="18" fill="#f5f5f5">Playtime:</text>
+      <text x="100" y="20" font-size="18" fill="#f5f5f5">PLAYTIME HOURS</text>
+    </g>
+  </g>
 </svg>
