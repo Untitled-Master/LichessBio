@@ -1,4 +1,3 @@
-// Bulma Theme JavaScript
 document.addEventListener("DOMContentLoaded", () => {
     const userInfoDiv = document.getElementById('user-info');
 
