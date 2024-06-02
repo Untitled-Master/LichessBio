@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Widget</title>
+    <title>Lichess User Widget</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
@@ -85,32 +85,68 @@
     </style>
 </head>
 <body>
-    <div id="widget" class="lichess">
-        <div class="sidebar">
-            <img src="profile-pic-url" alt="username">
-            <h1>username</h1>
-            <p>
-                <span class="status-dot" style="background-color: online-status-color;"></span>
-                Online: days days, hours h, and minutes min ago
-            </p>
-        </div>
-        <div class="ratings">
-            <h2><i class="fas fa-chess-knight icon"></i>Rapid: rapid-rating</h2>
-            <h2><i class="fas fa-bolt icon"></i>Blitz: blitz-rating</h2>
-            <h2><i class="fas fa-tachometer-alt icon"></i>Bullet: bullet-rating</h2>
-            <h2>Playtime: playtime hours</h2>
-        </div>
+    <div class="lichess" id="user-info">
+        <!-- User information will be displayed here -->
     </div>
-    <button id="download">Download as Image</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Button to download as image -->
+    <button id="downloadImage">Download Image</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
     <script>
-        document.getElementById('download').addEventListener('click', function() {
-            html2canvas(document.getElementById('widget')).then(function(canvas) {
-                let link = document.createElement('a');
-                link.download = 'profile-widget.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
+        document.addEventListener("DOMContentLoaded", () => {
+            const userInfoDiv = document.getElementById('user-info');
+
+            fetch('https://lichess.org/api/user/Dzoomaster')
+                .then(response => response.json())
+                .then(data => {
+                    displayUserInfo(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    userInfoDiv.innerHTML = `<p>Error fetching data.</p>`;
+                });
+
+            function displayUserInfo(user) {
+                const seenAt = new Date(user.seenAt);
+                const now = new Date();
+                const timeDiff = now - seenAt;
+
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+                const profilePicUrl = `https://i.pinimg.com/originals/31/35/27/3135276a3e0c9e65472d3e544839c658.jpg`; // Assumed placeholder for profile picture
+                const isOnline = now - seenAt < 600000; // Assumes user is online if seen within the last 10 minutes
+
+                userInfoDiv.innerHTML = `
+                    <div class="sidebar">
+                        <img src="${profilePicUrl}" alt="${user.username}">
+                        <h1>${user.username}</h1>
+                        <p>
+                            <span class="status-dot" style="background-color: ${isOnline ? '#23d160' : '#4a4a4a'};"></span>
+                            Online: ${days} days, ${hours} h, and ${minutes} min ago
+                        </p>
+                    </div>
+                    <div class="ratings">
+                        <h2><i class="fas fa-chess-knight icon"></i>Rapid: ${user.perfs.rapid.rating}</h2>
+                        <h2><i class="fas fa-bolt icon"></i>Blitz: ${user.perfs.blitz.rating}</h2>
+                        <h2><i class="fas fa-tachometer-alt icon"></i>Bullet: ${user.perfs.bullet.rating}</h2>
+                        <h2>Playtime: ${Math.floor(user.playTime.total / (60 * 60 * 1000))} hours</h2>
+                    </div>
+                `;
+
+                // Add event listener to the download button
+                document.getElementById('downloadImage').addEventListener('click', () => {
+                    html2canvas(userInfoDiv).then(canvas => {
+                        const image = canvas.toDataURL('image/png');
+                        const link = document.createElement('a');
+                        link.href = image;
+                        link.download = 'lichess_user_widget.png';
+                        link.click();
+                    });
+                });
+            }
         });
     </script>
 </body>
