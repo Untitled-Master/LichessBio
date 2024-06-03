@@ -111,7 +111,7 @@ app.get('/lichess-stats/:username', async (req, res) => {
                     .txt(`User: ${data.username}`).up()
                 .ele('text', { x: 20, y: 70, fill: '#f5f5f5', 'font-size': 18 })
                     .txt(`Online: ${days} days, ${hours} h, and ${minutes} min ago`).up()
-                .ele('image', { href: profilePicUrl, x: 20, y: 100, width: 100, height: 100 }).up()
+                .ele('image', { href: 'https://i.pinimg.com/originals/31/35/27/3135276a3e0c9e65472d3e544839c658.jpg', x: 20, y: 100, width: 100, height: 100 }).up()
                 .ele('text', { x: 140, y: 130, fill: '#f5f5f5', 'font-size': 18 })
                     .txt(`Rapid: ${data.perfs.rapid.rating}`).up()
                 .ele('text', { x: 140, y: 160, fill: '#f5f5f5', 'font-size': 18 })
